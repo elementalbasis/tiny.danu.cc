@@ -7,6 +7,10 @@
     <title>{{ page.title }} — {{ site.title }}</title>
 
     <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
+
+    {% if page.script %}
+    <script src="{{ '/assets/scripts/' | append: page.script | relative_url }}"></script>
+    {% endif %}
 </head>
 
 <body>
