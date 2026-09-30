@@ -5,22 +5,27 @@ title: Shorten a URL
 
 # tiny.danu.cc
 
-## A simple URL shortener!
+<p class="intro">A simple URL shortener.</p>
 
 <form id="shorten-form">
-    <input
-        id="url"
-        type="url"
-        placeholder="https://example.com/..."
-        required
-    >
-    <button type="submit">Shorten</button>
+    <label for="url">URL</label>
+    <div class="form-row">
+        <input
+            id="url"
+            name="url"
+            type="url"
+            placeholder="https://example.com/..."
+            autocomplete="url"
+            required
+        >
+        <button type="submit">Shorten</button>
+    </div>
 </form>
 
-<div id="result"></div>
+<div id="result" aria-live="polite"></div>
 
 <footer>
-    tiny.danu.cc
+    <a href="https://tiny.danu.cc">tiny.danu.cc</a>
 </footer>
 
 <script>
@@ -31,6 +36,13 @@ const result = document.getElementById("result");
 form.addEventListener("submit", async (event) => {
     event.preventDefault();
 
+    const url = input.value.trim();
+
+    if (!url) {
+        return;
+    }
+
+    result.className = "";
     result.textContent = "Shortening…";
 
     try {
@@ -39,9 +51,7 @@ form.addEventListener("submit", async (event) => {
             headers: {
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify({
-                url: input.value
-            })
+            body: JSON.stringify({ url })
         });
 
         const data = await response.json();
@@ -50,6 +60,7 @@ form.addEventListener("submit", async (event) => {
             throw new Error(data.error || "Unable to shorten URL.");
         }
 
+        result.className = "success";
         result.innerHTML = "";
 
         const link = document.createElement("a");
@@ -58,8 +69,8 @@ form.addEventListener("submit", async (event) => {
 
         result.appendChild(link);
     } catch (error) {
-        result.innerHTML =
-            `<span class="error">${error.message}</span>`;
+        result.className = "error";
+        result.textContent = error.message;
     }
 });
 </script>
