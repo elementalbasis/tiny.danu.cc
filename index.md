@@ -1,0 +1,65 @@
+---
+layout: default
+title: Shorten a URL
+---
+
+# tiny.danu.cc
+
+## A simple URL shortener!
+
+<form id="shorten-form">
+    <input
+        id="url"
+        type="url"
+        placeholder="https://example.com/..."
+        required
+    >
+    <button type="submit">Shorten</button>
+</form>
+
+<div id="result"></div>
+
+<footer>
+    tiny.danu.cc
+</footer>
+
+<script>
+const form = document.getElementById("shorten-form");
+const input = document.getElementById("url");
+const result = document.getElementById("result");
+
+form.addEventListener("submit", async (event) => {
+    event.preventDefault();
+
+    result.textContent = "Shortening…";
+
+    try {
+        const response = await fetch("https://api.tiny.danu.cc/create", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                url: input.value
+            })
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+            throw new Error(data.error || "Unable to shorten URL.");
+        }
+
+        result.innerHTML = "";
+
+        const link = document.createElement("a");
+        link.href = data.shortUrl;
+        link.textContent = data.shortUrl;
+
+        result.appendChild(link);
+    } catch (error) {
+        result.innerHTML =
+            `<span class="error">${error.message}</span>`;
+    }
+});
+</script>
