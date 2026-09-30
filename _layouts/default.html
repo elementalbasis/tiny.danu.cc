@@ -1,27 +1,19 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>{{ page.title }} — {{ site.title }}</title>
-
-    <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
-
-    {% if page.script %}
-    <script src="{{ '/assets/scripts/' | append: page.script | relative_url }}"></script>
-    {% endif %}
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="{{ site.description | escape }}">
+  <title>{{ page.title | escape }} — {{ site.title | escape }}</title>
+  <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
+  {% if page.script %}
+  <script type="module" src="{{ '/assets/scripts/' | append: page.script | relative_url }}"></script>
+  {% endif %}
 </head>
-
 <body>
-    <main>
-        {{ content }}
-    </main>
-
-    <footer>
-        <a href="{{ '/' | relative_url }}">{{ site.title }}</a>
-    </footer>
-
-    <script src="{{ '/assets/scripts/main.js' | relative_url }}"></script>
+  <div class="shell">
+    <main>{{ content }}</main>
+    <footer><a href="https://danu.cc">danu.cc</a></footer>
+  </div>
 </body>
 </html>

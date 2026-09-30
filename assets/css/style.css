@@ -1,123 +1,159 @@
-html {
-    font-size: 16px;
+* {
+  box-sizing: border-box;
+}
+
+:root {
+  color-scheme: light;
+  font-family: system-ui, sans-serif;
+  color: #172c45;
+  background: #f3f6fb;
 }
 
 body {
-    margin: 0;
-    background: #fff;
-    color: #222;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
-                 Helvetica, Arial, sans-serif;
-    line-height: 1.6;
+  margin: 0;
+  line-height: 1.6;
+}
+
+.shell {
+  width: min(100% - 2rem, 660px);
+  margin: clamp(3rem, 12vh, 8rem) auto 2rem;
 }
 
 main {
-    width: min(90%, 680px);
-    margin: 6rem auto;
+  padding: clamp(1.5rem, 5vw, 3rem);
+  border: 1px solid #dbe3ed;
+  border-radius: 16px;
+  background: white;
+  box-shadow: 0 12px 40px #172c4509;
 }
 
 h1 {
-    margin: 0 0 0.25rem;
-    font-size: 2rem;
-    font-weight: 500;
-    letter-spacing: -0.02em;
+  margin: 0;
+  font-size: clamp(1.8rem, 6vw, 2.4rem);
+  letter-spacing: -.04em;
+  line-height: 1.2;
+}
+
+h2 {
+  margin: 0 0 .5rem;
+  font-size: 1rem;
 }
 
 .intro {
-    margin: 0 0 2.5rem;
-    color: #666;
-}
-
-form {
-    margin: 0;
+  color: #5a6b80;
+  margin: .75rem 0 2rem;
 }
 
 label {
-    display: block;
-    margin-bottom: 0.4rem;
-    font-size: 0.9rem;
-    color: #555;
+  display: block;
+  margin-bottom: .5rem;
+  font-weight: 600;
 }
 
-.form-row {
-    display: flex;
-    gap: 0.5rem;
+.form-row,
+.actions {
+  display: flex;
+  gap: .75rem;
 }
 
-input[type="url"] {
-    flex: 1;
-    min-width: 0;
-    padding: 0.65rem 0.75rem;
-    border: 1px solid #aaa;
-    border-radius: 3px;
-    background: #fff;
-    color: #222;
-    font: inherit;
-    box-sizing: border-box;
-}
-
-input[type="url"]:focus {
-    outline: none;
-    border-color: #555;
+input {
+  min-width: 0;
+  flex: 1;
+  width: 100%;
+  border: 1px solid #a6b6c8;
+  border-radius: 8px;
+  padding: .8rem;
+  font: inherit;
 }
 
 button {
-    padding: 0.65rem 1rem;
-    border: 1px solid #888;
-    border-radius: 3px;
-    background: #f5f5f5;
-    color: #222;
-    font: inherit;
-    cursor: pointer;
-    white-space: nowrap;
+  border: 1px solid #174e95;
+  border-radius: 8px;
+  padding: .8rem 1rem;
+  background: #174e95;
+  color: white;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
 }
 
 button:hover {
-    background: #eaeaea;
+  background: #103d78;
 }
 
-#result {
-    margin-top: 1.5rem;
-    min-height: 1.6em;
+button:disabled {
+  opacity: .6;
+  cursor: wait;
 }
 
-#result a {
-    color: #0645ad;
+.secondary {
+  background: white;
+  color: #174e95;
+}
+
+.secondary:hover {
+  background: #edf3fb;
+}
+
+a {
+  color: #174e95;
+  text-underline-offset: .2em;
+}
+
+:focus-visible {
+  outline: 3px solid #518ad0;
+  outline-offset: 3px;
+}
+
+#status {
+  margin: 1.25rem 0 0;
+}
+
+#status:empty {
+  display: none;
 }
 
 .error {
-    color: #a00;
+  color: #a42626;
 }
 
-.success {
-    color: #222;
+#result {
+  margin-top: 1.5rem;
+}
+
+#short-link {
+  display: block;
+  font-size: 1.25rem;
+  font-weight: 600;
+  overflow-wrap: anywhere;
+}
+
+.actions {
+  margin-top: 1.25rem;
+  flex-wrap: wrap;
+  align-items: center;
 }
 
 footer {
-    margin-top: 5rem;
-    color: #777;
-    font-size: 0.85rem;
+  text-align: center;
+  padding: 1.5rem;
+  font-size: .9rem;
 }
 
 footer a {
-    color: inherit;
-    text-decoration: none;
+  color: #5a6b80;
 }
 
-footer a:hover {
-    text-decoration: underline;
+[hidden] {
+  display: none !important;
 }
 
 @media (max-width: 500px) {
-    main {
-        margin-top: 3rem;
-    }
+  .form-row {
+    flex-direction: column;
+  }
 
-    .form-row {
-        flex-direction: column;
-    }
-
-    button {
-        align-self: flex-start;
-    }
+  .form-row button {
+    width: 100%;
+  }
 }

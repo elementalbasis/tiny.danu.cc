@@ -1,6 +1,13 @@
 ---
 layout: default
-title: Redirecting
+title: Opening your link
+script: resolve.js
 ---
 
-<p id="status">Redirecting…</p>
+<h1 id="heading">Opening your link…</h1>
+<p id="status" role="status" aria-live="polite">Please wait while we find the destination.</p>
+<div class="actions">
+  <button id="retry" type="button" hidden>Try again</button>
+  <a href="{{ '/' | relative_url }}">Create a short link</a>
+</div>
+<noscript><p>Enable JavaScript to open this short link.</p></noscript>
